@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+html.dark, body.dark {
+  color-scheme: dark;
+}
+
+html:not(.dark), body:not(.dark) {
+  color-scheme: light;
+}
+
+@media print {
+  *, *:before, *:after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  html, body {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: 100% !important;
+    overflow: visible !important;
+  }
+
+  /* When printing from dedicated print portals */
+  body.print-only-financial-report > *:not(#financial-reports-print-portal),
+  body:has(#financial-reports-print-portal.is-printing) > *:not(#financial-reports-print-portal),
+  body.print-only-official-voucher > *:not(#official-voucher-print-portal),
+  body.print-only-official-discount > *:not(#official-discount-print-portal):not(#official-discount-print-container),
+  body.print-only-generic-portal > *:not(#generic-print-portal),
+  body:has(#generic-print-portal.is-printing) > *:not(#generic-print-portal),
+  body:has(#generic-print-portal) > *:not(#generic-print-portal):not(#official-voucher-print-portal):not(#official-discount-print-portal):not(#official-discount-print-container):not(#financial-reports-print-portal) {
+    display: none !important;
+  }
+
+  #generic-print-portal {
+    visibility: visible !important;
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    background: #ffffff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    overflow: visible !important;
+  }
+
+  #generic-print-portal *,
+  #official-voucher-print-portal,
+  #official-voucher-print-portal *,
+  #official-discount-print-portal,
+  #official-discount-print-portal * {
+    visibility: visible !important;
+  }
+
+  body:not(.print-only-financial-report):not(.print-only-official-voucher):not(.print-only-official-discount):not(.print-only-generic-portal):not(:has(#financial-reports-print-portal)):not(:has(#generic-print-portal)):not(:has(#official-voucher-print-portal)):not(:has(#official-discount-print-portal)) > * {
+    visibility: hidden !important;
+  }
+
+  .print-area, .print-area *,
+  .print-area-wrapper, .print-area-wrapper * {
+    visibility: visible !important;
+  }
+
+  .print-area {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    z-index: 99999 !important;
+    background: #ffffff !important;
+  }
+
+  .print-area .overflow-x-auto, .print-area .overflow-hidden {
+    overflow: visible !important;
+  }
+
+  .print-area table {
+    width: 100% !important;
+    table-layout: auto !important;
+    border-collapse: collapse !important;
+  }
+
+  tr {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  thead {
+    display: table-header-group !important;
+  }
+
+  tfoot {
+    display: table-footer-group !important;
+  }
+}
